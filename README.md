@@ -1,4 +1,4 @@
 # streetboard
 
-- Digital Sinage Player Sample
+- Digital Signage Player Sample
 - Electron
