@@ -1,6 +1,9 @@
 'use strict'
 
 import { app, BrowserWindow } from 'electron'
+import { httpServer } from './service'
+
+process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1'
 
 /**
  * Set `__static` path to static files in production
@@ -30,6 +33,8 @@ function createWindow () {
   mainWindow.on('closed', () => {
     mainWindow = null
   })
+
+  httpServer(mainWindow)
 }
 
 app.on('ready', createWindow)
@@ -64,4 +69,4 @@ autoUpdater.on('update-downloaded', () => {
 app.on('ready', () => {
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
 })
- */
+*/
