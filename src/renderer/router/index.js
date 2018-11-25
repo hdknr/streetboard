@@ -9,17 +9,15 @@ export default new Router({
       path: '/',
       name: 'landing-page',
       component: require('@/components/LandingPage').default,
-      children: [
-        {
-          path: 'settings',
-          name: 'settings-page',
-          component: require('@/components/SettingsDialog').default
-        }
-      ]
+      children: [{
+        path: 'settings',
+        name: 'settings-page',
+        component: require('@/components/SettingsDialog').default,
+      }],
     },
     {
       path: '*',
-      redirect: '/'
-    }
-  ]
+      redirect: '/',
+    },
+  ],
 })
