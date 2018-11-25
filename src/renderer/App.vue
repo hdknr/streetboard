@@ -11,9 +11,9 @@ export default {
   name: 'streetboard',
   created () {
     ipcRenderer.on('network-message', (event, arg) => {
-      if (arg.url === '/config') {
-        console.log(event, arg)
-        this.$router.push({name: 'config-page'})
+      if (arg.url === '/settings') {
+        console.log('settings', arg)
+        this.$router.push({path: '/settings'})
       }
       if (arg.url === '/main') {
         console.log(event, arg)
