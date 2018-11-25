@@ -1,6 +1,6 @@
 'use strict'
 import { ipcMain } from 'electron'
-const HTTP = require('http')
+import HTTP from 'http'
 
 export function httpServer (mainWindow) {
   HTTP.createServer((request, response) => {
