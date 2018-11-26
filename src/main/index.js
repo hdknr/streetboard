@@ -1,7 +1,7 @@
 'use strict'
 
 import { app, BrowserWindow } from 'electron'
-import { httpServer } from './service'
+import { initService } from './service'
 
 process.env.ELECTRON_DISABLE_SECURITY_WARNINGS = '1'
 
@@ -34,7 +34,7 @@ function createWindow () {
     mainWindow = null
   })
 
-  httpServer(mainWindow)
+  initService(mainWindow)
 }
 
 app.on('ready', createWindow)

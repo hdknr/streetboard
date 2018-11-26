@@ -12,7 +12,7 @@ export default {
   created () {
     ipcRenderer.on('network-message', (event, arg) => {
       if (arg.url === '/settings') {
-        console.log('settings', arg)
+        console.log(event, arg)
         this.$router.push({path: '/settings'})
       }
       if (arg.url === '/main') {
