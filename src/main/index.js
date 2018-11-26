@@ -22,7 +22,12 @@ function createWindow () {
   /**
    * Initial window options
    */
+  const webPreferences = {
+    webSecurity: false
+  }
+
   mainWindow = new BrowserWindow({
+    webPreferences: webPreferences, // local Video File
     height: 563,
     useContentSize: true,
     width: 1000
@@ -70,3 +75,5 @@ app.on('ready', () => {
   if (process.env.NODE_ENV === 'production') autoUpdater.checkForUpdates()
 })
 */
+
+app.commandLine.appendSwitch('autoplay-policy', 'no-user-gesture-required')

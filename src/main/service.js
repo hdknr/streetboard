@@ -34,3 +34,15 @@ ipcMain.on('configure', (event, arg) => {
     event.sender.send('configure-complete', {success: true})
   }
 })
+
+ipcMain.on('video-request', (event, arg) => {
+  console.log(arg)
+  if (arg.command === 'getnext') {
+    const arg = {
+      command: 'next',
+      break: false,
+      url: 'file:///Users/hide/Downloads/Video/fullsizeoutput_39d.mp4',
+    }
+    event.sender.send('video-response', arg)
+  }
+})
