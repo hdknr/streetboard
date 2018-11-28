@@ -2,6 +2,7 @@
 import { ipcMain } from 'electron'
 import HTTP from 'http'
 import { load } from './credentials'
+import { Playlist } from './playlist'
 
 export function httpServer (mainWindow) {
   HTTP.createServer((request, response) => {
@@ -35,13 +36,14 @@ ipcMain.on('configure', (event, arg) => {
   }
 })
 
+let playlist = new Playlist()
+
 ipcMain.on('video-request', (event, arg) => {
-  console.log(arg)
   if (arg.command === 'getnext') {
     const arg = {
-      command: 'next',
+      command: 'video',
       break: false,
-      url: 'file:///Users/hide/Downloads/Video/fullsizeoutput_39d.mp4',
+      url: playlist.next(),
     }
     event.sender.send('video-response', arg)
   }

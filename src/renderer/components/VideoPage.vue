@@ -1,15 +1,16 @@
 <template>
   <div id="wrapper">
-    <video autoplay id="videoContainer"></video>
+    <video-player ref="video" @start="onStart"></video-player>
   </div>
 </template>
 
 <script>
-import Vue from 'vue'
 import { ipcRenderer } from 'electron'
+import VideoPlayer from './VideoPage/VideoPlayer'
 
 export default {
   name: 'video-page',
+  components: { VideoPlayer },
   data () {
     return {
       videoUrl: null
@@ -17,27 +18,23 @@ export default {
   },
   created () {
     ipcRenderer.on('video-response', (event, arg) => {
-      if (arg.command === 'next') {
-        this.setNextVideo(arg)
+      if (arg.command === 'video') {
+        this.player.setUrl(arg.url, arg.break)
       }
     })
     this.requestNextVideo()
   },
   computed: {
     player () {
-      return document.querySelector('video')
+      return this.$refs['video']
     }
   },
   methods: {
     requestNextVideo () {
       ipcRenderer.send('video-request', {command: 'getnext'})
     },
-    setNextVideo (arg) {
-      Vue.set(this, 'videoUrl', arg.url)
-      if (this.videoUrl !== this.player.src || arg.break) {
-        this.player.src = this.videoUrl // TODO: report playing
-        this.requestNextVideo()
-      }
+    onStart (url) {
+      this.requestNextVideo()
     }
   }
 }
