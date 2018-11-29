@@ -35,9 +35,9 @@
     data () {
       return {
         electron: process.versions.electron,
-        name: this.$route.name,
+        name: this.$route ? this.$route.name : null,
         node: process.versions.node,
-        path: this.$route.path,
+        path: this.$route ? this.$route.path : null,
         platform: require('os').platform(),
         vue: require('vue/package.json').version
       }

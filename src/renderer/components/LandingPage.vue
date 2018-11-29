@@ -27,8 +27,8 @@
         </div>
       </div>
     </main>
-
-    <router-view></router-view> <!-- nested routing -->
+    <router-view></router-view>
+    <!-- nested routing -->
 
   </div>
 </template>

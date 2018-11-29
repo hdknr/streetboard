@@ -1,10 +1,14 @@
 import Vue from 'vue'
 import LandingPage from '@/components/LandingPage'
+import router from '@/router'
+import store from '@/store'
 
 describe('LandingPage.vue', () => {
   it('should render correct contents', () => {
     const vm = new Vue({
       el: document.createElement('div'),
+      router: router,
+      store: store,
       render: h => h(LandingPage)
     }).$mount()
 
