@@ -4,13 +4,16 @@ import HTTP from 'http'
 import { load } from './credentials'
 import { Playlist } from './playlist'
 
+let playlist = new Playlist()
+
+
 export function httpServer (mainWindow) {
   HTTP.createServer((request, response) => {
     request.addListener('end', () => {
       response.writeHead(200, {
         'Content-Type': 'text/plain'
       })
-      response.end('Hello Electron Vue!\n')
+      response.end('ok')
       mainWindow.webContents.send('network-message', request)
     }).resume()
   }).listen(9900, '0.0.0.0')
@@ -36,7 +39,6 @@ ipcMain.on('configure', (event, arg) => {
   }
 })
 
-let playlist = new Playlist()
 
 ipcMain.on('video-request', (event, arg) => {
   if (arg.command === 'getnext') {
