@@ -7,7 +7,8 @@ describe('LandingPage.vue', () => {
   it('should render correct contents', () => {
     const vm = new Vue({
       el: document.createElement('div'),
-      router, store,
+      router,
+      store,
       render: h => h(LandingPage)
     }).$mount()
 

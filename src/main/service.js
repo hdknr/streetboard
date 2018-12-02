@@ -6,7 +6,6 @@ import { Playlist } from './playlist'
 
 let playlist = new Playlist()
 
-
 export function httpServer (mainWindow) {
   HTTP.createServer((request, response) => {
     request.addListener('end', () => {
@@ -38,7 +37,6 @@ ipcMain.on('configure', (event, arg) => {
     event.sender.send('configure-complete', {success: true})
   }
 })
-
 
 ipcMain.on('video-request', (event, arg) => {
   if (arg.command === 'getnext') {
