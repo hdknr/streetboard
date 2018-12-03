@@ -1,10 +1,11 @@
 'use strict'
 import { ipcMain } from 'electron'
 import HTTP from 'http'
-import { load } from './credentials'
+import credentials from './credentials'
 import { Playlist } from './playlist'
 
 let playlist = new Playlist()
+let settings = null
 
 export function httpServer (mainWindow) {
   HTTP.createServer((request, response) => {
@@ -23,13 +24,17 @@ export async function initService (mainWindow) {
     httpServer(mainWindow)
     mainWindow.webContents.send('network-message', {url: '/settings'})
     try {
-      const credentials = JSON.parse(await load())
-      if (credentials == null) {
+      const settings = JSON.parse(await credentials.load())
+      if (settings == null) {
       }
     } catch (e) {
       // mainWindow.webContents.send('system-message', {})
     }
   }
+}
+
+export async function saveSettings () {
+  await credentials.save(settings)
 }
 
 ipcMain.on('configure', (event, arg) => {
@@ -39,6 +44,15 @@ ipcMain.on('configure', (event, arg) => {
 })
 
 ipcMain.on('video-request', (event, arg) => {
+  if (playlist == null) {
+    const arg = {
+      command: 'error',
+      reason: 'no-playlist',
+    }
+    event.sender.send('video-response', arg)
+    return
+  }
+
   if (arg.command === 'getnext') {
     const arg = {
       command: 'video',
@@ -48,3 +62,7 @@ ipcMain.on('video-request', (event, arg) => {
     event.sender.send('video-response', arg)
   }
 })
+
+export default {
+  initService, saveSettings,
+}

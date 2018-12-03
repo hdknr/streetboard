@@ -6,12 +6,12 @@ import upath from 'upath'
 export class Playlist {
   constructor () {
     this.base = '/Users/hide/Downloads/Video'
-    this.index = 0
+    this.index = -1
     this.videoUrls = allVideoUrls(this.base)
   }
   next () {
-    console.log(this.videoUrls)
-    this.index = (this.index >= this.videoUrls.length) ? 0 : this.index + 1
+    this.index = (this.index >= (this.videoUrls.length - 1)) ? 0 : (this.index + 1)
+    console.log(this.index)
     return this.videoUrls[this.index]
   }
 }
@@ -28,4 +28,8 @@ export function allVideoUrls (path) {
   return allVideoFiles(path).map((file) => {
     return encodeUrl(`file://${pathUrl}/${file}`)
   })
+}
+
+export default {
+  Playlist, allVideoFiles, allVideoUrls,
 }

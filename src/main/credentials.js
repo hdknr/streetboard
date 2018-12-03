@@ -13,3 +13,7 @@ export function load () {
 export function save (data) {
   keytar.setPassword(SERVICE, USER, JSON.stringify(data))
 }
+
+export default {
+  load, save,
+}
