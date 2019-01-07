@@ -31,4 +31,24 @@ export default {
 
 <style>
 /* CSS */
+html, body{
+    width: 100%;
+    height: 100%;
+    margin:0;
+    padding:0;
+    overflow:hidden;
+    color:rgb(180,180,180);
+    -webkit-user-select: none;
+    font-family: ubuntu,helvetica,arial;
+}
+body *{
+    position:relative;
+    cursor:default;
+}
+
+#app {
+    height:100%;
+    width:100%;  
+}
+
 </style>

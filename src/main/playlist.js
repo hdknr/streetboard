@@ -6,15 +6,14 @@ import encodeUrl from 'encodeurl'
 
 export class Playlist {
   constructor () {
-    // this.base = '/Users/hide/Downloads/Video'
-    // this.base = '/C:/Users/spin/Videos'
-    this.base = new URL('file:///C:/Users/spin/Videos')
+    const base = '/Users/hide/Downloads/Video'
+    // const base = '/C:/Users/spin/Videos'
+    this.base = new URL(`file://${base}`)
     this.index = -1
     this.videoUrls = allVideoUrls(this.base)
   }
   next () {
     this.index = (this.index >= (this.videoUrls.length - 1)) ? 0 : (this.index + 1)
-    console.log(this.index)
     return this.videoUrls[this.index]
   }
 }

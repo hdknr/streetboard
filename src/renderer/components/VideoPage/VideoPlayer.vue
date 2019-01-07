@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div id="videoComponent">
     <video autoplay id="videoContainer"></video>
   </div>
 </template>
@@ -38,3 +38,20 @@ export default {
   }
 }
 </script>
+
+<style>
+#videoComponent {
+    height:100%;
+    width:100%;  
+}
+#wrapper {
+    padding: 0px;
+    height:100%;
+    width:100%;  
+}
+
+#videoContainer {
+    height:100%;
+    width:100%;  
+}
+</style>
