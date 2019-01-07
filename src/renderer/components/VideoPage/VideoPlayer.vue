@@ -53,6 +53,7 @@ export default {
 #videoComponent {
     height:100%;
     width:100%;  
+    background:rgb(0,0,0);
 }
 #wrapper {
     padding: 0px;
