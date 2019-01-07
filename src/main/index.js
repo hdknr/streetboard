@@ -28,8 +28,11 @@ function createWindow () {
 
   mainWindow = new BrowserWindow({
     webPreferences: webPreferences, // local Video File
-    height: 563,
     useContentSize: true,
+    kiosk: true,
+    frame: false,
+    fullscreen: true,
+    height: 563,
     width: 1000
   })
 

@@ -22,6 +22,7 @@ export class Playlist {
 export function allVideoFiles (url) {
   return fs.readdirSync(url).filter((file) => {
     const mt = mime.getType(file)
+    let path = `${url}/${file}`
     return fs.statSync(new URL(path)).isFile() && mt && mt.startsWith('video')
   })
 }
