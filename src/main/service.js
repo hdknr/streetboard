@@ -37,9 +37,14 @@ export async function saveSettings () {
   await credentials.save(settings)
 }
 
-ipcMain.on('configure', (event, arg) => {
+ipcMain.on('settings-request', async (event, arg) => {
+  const settings = JSON.parse(await credentials.load())
+  event.sender.send('settings-response', settings)
+})
+
+ipcMain.on('configure-request', (event, arg) => {
   if (arg.message.token) {
-    event.sender.send('configure-complete', {success: true})
+    event.sender.send('configure-response', {success: true})
   }
 })
 

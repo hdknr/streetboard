@@ -21,8 +21,8 @@
           <slot name="footer">
             default footer
             <button class="modal-default-button" @click="configure">
-                          Configure
-                        </button>
+              Configure
+            </button>
           </slot>
         </div>
       </div>
@@ -41,15 +41,20 @@ export default {
     }
   },
   created () {
-    ipcRenderer.on('configure-complete', (event, arg) => {
+    ipcRenderer.on('configure-response', (event, arg) => {
       if (arg.success === true) {
         this.$router.go(-1) // back to previous
       }
     })
+    ipcRenderer.on('settings-response', (event, arg) => {
+      // TODO: change UI
+      console.log(arg)
+    })
+    ipcRenderer.send('settings-request')
   },
   methods: {
     configure () {
-      ipcRenderer.send('configure', {
+      ipcRenderer.send('configure-request', {
         message: this.settings
       })
     }
@@ -100,13 +105,13 @@ export default {
 }
 
 /*
-           * The following styles are auto-applied to elements with
-           * transition="modal" when their visibility is toggled
-           * by Vue.js.
-           *
-           * You can easily play with the modal transition by editing
-           * these styles.
-           */
+ * The following styles are auto-applied to elements with
+ * transition="modal" when their visibility is toggled
+ * by Vue.js.
+ *
+ * You can easily play with the modal transition by editing
+ * these styles.
+*/
 
 .modal-enter {
   opacity: 0;
