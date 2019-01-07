@@ -27,8 +27,18 @@ export default {
         this.play()
       }
     },
+    fadeIn () {
+      let op = 0
+      const timer = setInterval(() => {
+        if (op >= 1) clearInterval(timer)
+        this.player.style.opacity = op
+        this.player.style.filter = 'alpha(opacity=' + op * 100 + ')'
+        op += op * 0.1 || 0.1
+      }, 50)
+    },
     play () {
       this.player.src = this.url
+      this.fadeIn()
       this.$emit('start', this.url)
     },
     onEnd (e) {
