@@ -7,8 +7,8 @@ export default new Router({
   routes: [
     {
       path: '/',
-      name: 'landing-page',
-      component: require('@/components/LandingPage').default,
+      name: 'home',
+      component: require('@/components/VideoPage').default,
       children: [{
         path: 'settings',
         name: 'settings-page',
@@ -19,6 +19,11 @@ export default new Router({
       path: '/video',
       name: 'video-page',
       component: require('@/components/VideoPage').default,
+    },
+    {
+      path: '/video',
+      name: 'landing-page',
+      component: require('@/components/LandingPage').default,
     },
     {
       path: '*',
