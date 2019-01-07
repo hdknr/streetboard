@@ -6,8 +6,8 @@ import encodeUrl from 'encodeurl'
 
 export class Playlist {
   constructor () {
-    const base = '/Users/hide/Downloads/Video'
-    // const base = '/C:/Users/spin/Videos'
+    // const base = '/Users/hide/Downloads/Video'
+    const base = '/C:/Users/Public/Videos'
     this.base = new URL(`file://${base}`)
     this.index = -1
     this.videoUrls = allVideoUrls(this.base)
