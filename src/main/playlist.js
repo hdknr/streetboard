@@ -1,11 +1,14 @@
 import fs from 'fs'
+import {URL} from 'url'
 import mime from 'mime'
 import encodeUrl from 'encodeurl'
-import upath from 'upath'
+// import upath from 'upath'
 
 export class Playlist {
   constructor () {
-    this.base = '/Users/hide/Downloads/Video'
+    // this.base = '/Users/hide/Downloads/Video'
+    // this.base = '/C:/Users/spin/Videos'
+    this.base = new URL('file:///C:/Users/spin/Videos')
     this.index = -1
     this.videoUrls = allVideoUrls(this.base)
   }
@@ -16,17 +19,16 @@ export class Playlist {
   }
 }
 
-export function allVideoFiles (path) {
-  return fs.readdirSync(path).filter((file) => {
+export function allVideoFiles (url) {
+  return fs.readdirSync(url).filter((file) => {
     const mt = mime.getType(file)
-    return fs.statSync(`${path}/${file}`).isFile() && mt && mt.startsWith('video')
+    return fs.statSync(new URL(path)).isFile() && mt && mt.startsWith('video')
   })
 }
 
-export function allVideoUrls (path) {
-  const pathUrl = upath.toUnix(path)
-  return allVideoFiles(path).map((file) => {
-    return encodeUrl(`file://${pathUrl}/${file}`)
+export function allVideoUrls (url) {
+  return allVideoFiles(url).map((file) => {
+    return encodeUrl(`${url}/${file}`)
   })
 }
 
